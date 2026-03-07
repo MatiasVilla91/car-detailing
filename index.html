@@ -1,0 +1,680 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Aprendé Car Detailing y empezá a construir algo tuyo</title>
+  <meta name="description" content="Aprendé Car Detailing paso a paso y empezá a desarrollar una habilidad que te guste, te motive y te ayude a construir algo tuyo." />
+  <style>
+    :root{
+      --bg:#0b0f14;
+      --bg-soft:#121821;
+      --card:#161f2b;
+      --text:#f5f7fb;
+      --muted:#bcc6d3;
+      --line:rgba(255,255,255,.08);
+      --accent:#27d46c;
+      --accent-dark:#19b356;
+      --accent-soft:rgba(39,212,108,.12);
+      --gold:#ffd166;
+      --shadow:0 18px 60px rgba(0,0,0,.32);
+      --radius:24px;
+      --max:1160px;
+    }
+
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      font-family:Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;
+      color:var(--text);
+      background:
+        radial-gradient(circle at top left, rgba(39,212,108,.10), transparent 28%),
+        radial-gradient(circle at top right, rgba(255,209,102,.07), transparent 22%),
+        linear-gradient(180deg,#0b0f14 0%, #101721 100%);
+      line-height:1.65;
+    }
+
+    a{text-decoration:none;color:inherit}
+    .container{width:min(92%, var(--max)); margin:0 auto;}
+    .topbar{
+      position:sticky;
+      top:0;
+      z-index:999;
+      backdrop-filter:blur(14px);
+      background:rgba(11,15,20,.78);
+      border-bottom:1px solid var(--line);
+    }
+    .topbar-inner{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:16px;
+      padding:14px 0;
+    }
+    .brand{
+      font-weight:900;
+      letter-spacing:.2px;
+      font-size:1rem;
+    }
+    .brand span{color:var(--accent)}
+
+    .btn{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap:10px;
+      padding:16px 26px;
+      border-radius:999px;
+      background:linear-gradient(180deg,var(--accent),var(--accent-dark));
+      color:#07110b;
+      font-weight:900;
+      box-shadow:0 14px 34px rgba(39,212,108,.25);
+      transition:.25s ease;
+      border:none;
+      cursor:pointer;
+      text-align:center;
+    }
+    .btn:hover{
+      transform:translateY(-2px);
+      box-shadow:0 18px 40px rgba(39,212,108,.30);
+    }
+    .btn.secondary{
+      background:transparent;
+      color:var(--text);
+      border:1px solid var(--line);
+      box-shadow:none;
+    }
+
+    .hero{
+      padding:78px 0 40px;
+    }
+    .hero-grid{
+      display:grid;
+      grid-template-columns:1.08fr .92fr;
+      gap:30px;
+      align-items:center;
+    }
+    .eyebrow{
+      display:inline-block;
+      padding:8px 14px;
+      border-radius:999px;
+      border:1px solid rgba(255,209,102,.16);
+      background:rgba(255,209,102,.08);
+      color:var(--gold);
+      font-size:.86rem;
+      font-weight:800;
+      margin-bottom:18px;
+    }
+    h1{
+      margin:0 0 18px;
+      font-size:clamp(2.4rem,5vw,4.7rem);
+      line-height:1.03;
+      letter-spacing:-1.8px;
+    }
+    .lead{
+      color:var(--muted);
+      font-size:1.08rem;
+      margin:0 0 16px;
+      max-width:700px;
+    }
+    .hero-points{
+      list-style:none;
+      padding:0;
+      margin:24px 0 30px;
+      display:grid;
+      gap:12px;
+    }
+    .hero-points li{
+      background:rgba(255,255,255,.03);
+      border:1px solid var(--line);
+      border-radius:18px;
+      padding:14px 16px;
+      color:#dbe5ee;
+    }
+    .cta-group{
+      display:flex;
+      gap:14px;
+      flex-wrap:wrap;
+      margin-top:12px;
+    }
+
+    .hero-card, .card, .story-box{
+      background:linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.02));
+      border:1px solid var(--line);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+    }
+    .hero-card{padding:26px;}
+    .mini-block{
+      padding:16px 18px;
+      background:rgba(255,255,255,.03);
+      border:1px solid var(--line);
+      border-radius:18px;
+      margin-bottom:12px;
+    }
+    .mini-block:last-child{margin-bottom:0}
+    .mini-block strong{display:block; margin-bottom:4px;}
+
+    .section{padding:74px 0;}
+    .reveal-section{
+      opacity:0;
+      transform:translateY(26px);
+      transition:opacity .7s ease, transform .7s ease;
+      will-change:opacity, transform;
+    }
+    .reveal-section.is-visible{
+      opacity:1;
+      transform:translateY(0);
+    }
+    .section-title{
+      margin:0 0 14px;
+      font-size:clamp(1.9rem,3vw,3.1rem);
+      line-height:1.08;
+      letter-spacing:-1px;
+    }
+    .section-subtitle{
+      margin:0 0 32px;
+      color:var(--muted);
+      max-width:800px;
+      font-size:1.04rem;
+    }
+
+    .grid-3{
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:22px;
+    }
+    .grid-2{
+      display:grid;
+      grid-template-columns:repeat(2,1fr);
+      gap:22px;
+    }
+
+    .card{padding:24px;}
+    .card h3{
+      margin:0 0 10px;
+      font-size:1.12rem;
+    }
+    .card p{
+      margin:0;
+      color:var(--muted);
+    }
+
+    .highlight{
+      background:
+        linear-gradient(180deg, rgba(39,212,108,.07), rgba(39,212,108,.02)),
+        var(--bg-soft);
+      border-top:1px solid var(--line);
+      border-bottom:1px solid var(--line);
+    }
+
+    .story{
+      display:grid;
+      grid-template-columns:.96fr 1.04fr;
+      gap:24px;
+      align-items:start;
+    }
+    .story-box{padding:28px;}
+    .story-box p{
+      margin:0 0 14px;
+      color:var(--muted);
+    }
+    .story-box p:last-child{margin-bottom:0}
+
+    .checklist{
+      list-style:none;
+      padding:0;
+      margin:0;
+      display:grid;
+      gap:14px;
+    }
+    .checklist li{
+      background:rgba(255,255,255,.03);
+      border:1px solid var(--line);
+      border-radius:18px;
+      padding:16px 18px;
+      color:#dbe5ee;
+    }
+
+    .bonus-list{
+      display:grid;
+      gap:16px;
+    }
+    .bonus{
+      background:rgba(255,255,255,.03);
+      border:1px solid var(--line);
+      border-radius:18px;
+      padding:18px;
+    }
+    .photo-grid{
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:16px;
+    }
+    .photo-card{
+      border-radius:20px;
+      overflow:hidden;
+      border:1px solid var(--line);
+      background:rgba(255,255,255,.02);
+      box-shadow:var(--shadow);
+    }
+    .photo-card img{
+      width:100%;
+      height:230px;
+      object-fit:cover;
+      display:block;
+    }
+    .photo-caption{
+      margin:0;
+      padding:12px 14px;
+      color:var(--muted);
+      font-size:.95rem;
+      border-top:1px solid var(--line);
+    }
+    .bonus strong{
+      display:block;
+      margin-bottom:6px;
+    }
+
+    .faq{
+      display:grid;
+      gap:14px;
+    }
+    details{
+      background:linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.02));
+      border:1px solid var(--line);
+      border-radius:18px;
+      padding:18px;
+      box-shadow:var(--shadow);
+    }
+    summary{
+      cursor:pointer;
+      font-weight:800;
+    }
+    details p{
+      color:var(--muted);
+      margin:12px 0 0;
+    }
+
+    .final-cta{
+      padding:84px 0 100px;
+      text-align:center;
+    }
+    .final-box{
+      max-width:900px;
+      margin:0 auto;
+      padding:38px 24px;
+      border-radius:30px;
+      background:linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.02));
+      border:1px solid var(--line);
+      box-shadow:var(--shadow);
+    }
+    .notice{
+      margin-top:16px;
+      font-size:.92rem;
+      color:#95a3b2;
+    }
+
+    .footer{
+      border-top:1px solid var(--line);
+      padding:30px 0 46px;
+      color:#8a97a5;
+      font-size:.92rem;
+    }
+
+    @media (max-width: 950px){
+      .hero-grid,
+      .grid-3,
+      .grid-2,
+      .story,
+      .photo-grid{
+        grid-template-columns:1fr;
+      }
+      .topbar-inner{
+        flex-direction:column;
+        align-items:stretch;
+      }
+      .topbar-inner .btn,
+      .cta-group .btn{
+        width:100%;
+      }
+      .hero{
+        padding-top:48px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header class="topbar">
+    <div class="container topbar-inner">
+      <div class="brand">Tu camino al <span>Car Detailing</span></div>
+      <a class="btn" href="https://hotmart.com/es/marketplace/productos/curso-detailing-2024/U90553310Y?ref=A104797637A" target="_blank" rel="noopener noreferrer">
+        QUIERO VER EL CURSO
+      </a>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="container hero-grid">
+        <div>
+          <div class="eyebrow">Aprendé una habilidad que te motive y te abra camino</div>
+          <h1>Si hace tiempo querés empezar algo propio, este puede ser tu punto de partida.</h1>
+
+          <p class="lead">
+            Tal vez te pasa esto: te gustan los autos, te llama la atención ver un vehículo impecable, bien trabajado, con ese nivel de detalle que hace que todo cambie… y pensás que te encantaría aprender a hacer eso.
+          </p>
+
+          <p class="lead">
+            No solo porque te gusta. También porque sentís que ya es hora de dejar de dar vueltas, dejar de postergar y empezar a meterte en algo que de verdad te motive.
+          </p>
+
+          <p class="lead">
+            Este curso de Car Detailing está pensado para ayudarte a dar ese paso. Para que dejes de mirar desde afuera, empieces a entender el proceso y desarrolles una habilidad que podés disfrutar, perfeccionar y convertir en una oportunidad para vos.
+          </p>
+
+          <ul class="hero-points">
+            <li>✅ Aprendés paso a paso, aunque hoy sientas que empezás desde cero.</li>
+            <li>✅ Entendés cómo trabajar un auto con más criterio, más cuidado y mejores resultados.</li>
+            <li>✅ Dejás de depender de videos sueltos y empezás a seguir una ruta mucho más clara.</li>
+            <li>✅ Empezás a construir una base que puede ayudarte a crear algo tuyo más adelante.</li>
+          </ul>
+
+          <div class="cta-group">
+            <a class="btn" href="https://hotmart.com/es/marketplace/productos/curso-detailing-2024/U90553310Y?ref=A104797637A" target="_blank" rel="noopener noreferrer">
+              SÍ, QUIERO EMPEZAR
+            </a>
+            <a class="btn secondary" href="#historia">
+              QUIERO SABER MÁS
+            </a>
+          </div>
+        </div>
+
+        <div class="hero-card">
+          <div class="mini-block">
+            <strong>No se trata solo de autos</strong>
+            Se trata de aprender algo que te entusiasme, te haga crecer y te dé una nueva dirección.
+          </div>
+          <div class="mini-block">
+            <strong>No tenés que saber todo hoy</strong>
+            Lo importante es empezar con una guía clara y con ganas de avanzar.
+          </div>
+          <div class="mini-block">
+            <strong>Tener un camino ordenado cambia todo</strong>
+            Te da más seguridad, más foco y mucha menos confusión.
+          </div>
+          <div class="mini-block">
+            <strong>Cuando aprendés bien, se nota</strong>
+            En los resultados, en la confianza y en cómo empezás a ver este mundo con otros ojos.
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="historia" class="section">
+      <div class="container">
+        <h2 class="section-title">Quizás esto te suene demasiado familiar</h2>
+        <p class="section-subtitle">
+          Te interesa este mundo. Te gustan los autos. Te atrae ver cómo un vehículo cambia por completo cuando se trabaja bien. Y más de una vez pensaste que estaría buenísimo aprender, meterte de lleno y empezar a hacer algo con eso.
+        </p>
+
+        <p class="section-subtitle" style="max-width: 900px;">
+          Pero entre una cosa y otra, lo seguís dejando para después. A veces porque no sabés por dónde arrancar. A veces porque hay demasiada información mezclada. A veces porque te da miedo equivocarte, gastar de más o no saber si vas a estar a la altura.
+        </p>
+
+        <p class="section-subtitle" style="max-width: 900px;">
+          Y mientras tanto seguís mirando desde afuera. Con ganas, con interés, con curiosidad… pero sin avanzar de verdad. Y eso pesa, porque en el fondo sabés que esto no te atrae por casualidad: te atrae porque querés aprender algo que te guste, te desafíe y te haga sentir que estás yendo hacia algún lado.
+        </p>
+
+        <div class="grid-3">
+          <div class="card">
+            <h3>Te entusiasma, pero no sabés cómo empezar</h3>
+            <p>
+              Ves trabajos increíbles, autos transformados, interiores renovados y resultados que impactan. Te gustaría aprender, pero no tener una ruta clara hace que todo parezca más difícil de lo que realmente es.
+            </p>
+          </div>
+
+          <div class="card">
+            <h3>Te frenan las dudas y la confusión</h3>
+            <p>
+              No querés empezar mal, perder tiempo o sentir que estás improvisando. Y cuando no tenés claridad, es fácil volver a postergarlo una vez más.
+            </p>
+          </div>
+
+          <div class="card">
+            <h3>Querés sentir que por fin arrancaste</h3>
+            <p>
+              No querés seguir solo mirando contenido o pensando “algún día”. Querés dar el paso, aprender bien y sentir que estás avanzando en algo que de verdad te importa.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <h2 class="section-title">Asi se ven los resultados del detailing</h2>
+        <p class="section-subtitle">
+          Una imagen vale mas que mil palabras: brillo real, interiores renovados y terminaciones prolijas que hacen la diferencia.
+        </p>
+
+        <div class="photo-grid">
+          <figure class="photo-card">
+            <img src="https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=1200&q=80" alt="Auto deportivo negro con brillo de pintura" loading="lazy" decoding="async" />
+            <figcaption class="photo-caption">Acabado exterior con brillo profundo.</figcaption>
+          </figure>
+          <figure class="photo-card">
+            <img src="https://images.unsplash.com/photo-1607860108855-64acf2078ed9?auto=format&fit=crop&w=1200&q=80" alt="Lavado detallado de auto con espuma activa" loading="lazy" decoding="async" />
+            <figcaption class="photo-caption">Lavado tecnico para cuidar la pintura.</figcaption>
+          </figure>
+          <figure class="photo-card">
+            <img src="https://images.unsplash.com/photo-1552519507-da3b142c6e3d?auto=format&fit=crop&w=1200&q=80" alt="Interior de auto premium limpio y restaurado" loading="lazy" decoding="async" />
+            <figcaption class="photo-caption">Interiores limpios, cuidados y prolijos.</figcaption>
+          </figure>
+          <figure class="photo-card">
+            <img src="https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?auto=format&fit=crop&w=1200&q=80" alt="Auto rojo detallado con reflejos marcados" loading="lazy" decoding="async" />
+            <figcaption class="photo-caption">Correccion visual que se nota al instante.</figcaption>
+          </figure>
+          <figure class="photo-card">
+            <img src="https://images.unsplash.com/photo-1489824904134-891ab64532f1?auto=format&fit=crop&w=1200&q=80" alt="Detalle de carroceria de lujo con alto brillo" loading="lazy" decoding="async" />
+            <figcaption class="photo-caption">Proteccion y terminacion profesional.</figcaption>
+          </figure>
+          <figure class="photo-card">
+            <img src="https://images.unsplash.com/photo-1503736334956-4c8f8e92946d?auto=format&fit=crop&w=1200&q=80" alt="Auto oscuro con reflejo espejo despues de detailing" loading="lazy" decoding="async" />
+            <figcaption class="photo-caption">Resultado final con efecto espejo.</figcaption>
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <section class="section highlight">
+      <div class="container story">
+        <div class="story-box">
+          <h2 class="section-title" style="font-size:2rem;">Acá es donde todo puede empezar a ordenarse</h2>
+          <p>
+            Cuando tenés una guía clara, todo cambia.
+          </p>
+          <p>
+            Dejás de sentir que tenés que adivinar. Dejás de saltar de un video a otro. Dejás de mirar este mundo como algo lejano y empezás a entenderlo paso a paso.
+          </p>
+          <p>
+            Eso hace que aprender se vuelva mucho más llevadero, mucho más motivador y mucho más disfrutable.
+          </p>
+          <p>
+            Este curso está pensado justamente para eso: ayudarte a pasar de la duda al aprendizaje, y del interés a la acción.
+          </p>
+        </div>
+
+        <div class="story-box">
+          <h3 style="margin-top:0;">¿Qué puede cambiar para vos?</h3>
+          <ul class="checklist">
+            <li>✅ Más claridad para entender el proceso sin sentirte perdido.</li>
+            <li>✅ Más confianza para empezar con una base mejor armada.</li>
+            <li>✅ Más criterio para comprender técnicas, pasos y herramientas.</li>
+            <li>✅ Más motivación para dejar de postergar y empezar en serio.</li>
+            <li>✅ Más preparación para convertir este interés en algo que te haga crecer.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="programa">
+      <div class="container">
+        <h2 class="section-title">Lo que vas a ir aprendiendo dentro del curso</h2>
+        <p class="section-subtitle">
+          La idea no es llenarte de teoría innecesaria. La idea es que entiendas el proceso con claridad, que sepas para qué sirve cada etapa y que empieces a ver cómo se construye un trabajo cada vez más prolijo y profesional.
+        </p>
+
+        <div class="grid-2">
+          <div class="card">
+            <h3>Lavado y secado</h3>
+            <p>Para arrancar bien desde la base y aprender a tratar el vehículo con más cuidado y mejor técnica.</p>
+          </div>
+          <div class="card">
+            <h3>Descontaminado e inspección</h3>
+            <p>Para aprender a observar mejor el auto, entender su estado y trabajar con más criterio.</p>
+          </div>
+          <div class="card">
+            <h3>Pulido y corrección</h3>
+            <p>Para mejorar el acabado, elevar el nivel del trabajo y lograr resultados que se notan.</p>
+          </div>
+          <div class="card">
+            <h3>Interiores, faros y protección</h3>
+            <p>Para completar un servicio más prolijo, más completo y mucho más atractivo.</p>
+          </div>
+        </div>
+
+        <div class="cta-group" style="justify-content:center;">
+          <a class="btn" href="https://hotmart.com/es/marketplace/productos/curso-detailing-2024/U90553310Y?ref=A104797637A" target="_blank" rel="noopener noreferrer">
+            QUIERO ACCEDER AL CURSO
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <section class="section highlight">
+      <div class="container">
+        <h2 class="section-title">Además, no vas a estar solo en el proceso</h2>
+        <p class="section-subtitle">
+          El contenido principal ya de por sí te da una base valiosa, pero también hay extras pensados para acompañarte, ampliar lo que aprendés y ayudarte a mirar este camino con mucha más profundidad.
+        </p>
+
+        <div class="bonus-list">
+          <div class="bonus">
+            <strong>Comunidad privada</strong>
+            Para sentirte acompañado, compartir dudas y avanzar con más confianza.
+          </div>
+          <div class="bonus">
+            <strong>Tratamiento cerámico</strong>
+            Para seguir ampliando tu conocimiento y sumar nuevas posibilidades.
+          </div>
+          <div class="bonus">
+            <strong>Polarizado automotriz</strong>
+            Para abrirte a otros servicios dentro del mismo universo automotor.
+          </div>
+          <div class="bonus">
+            <strong>Acceso permanente</strong>
+            Para volver a las clases cuando quieras y avanzar a tu ritmo.
+          </div>
+          <div class="bonus">
+            <strong>Guía de productos, máquinas y marcas</strong>
+            Para entender mejor con qué se trabaja y reducir mucho la confusión al empezar.
+          </div>
+          <div class="bonus">
+            <strong>Guía para empezar tu negocio</strong>
+            Para ayudarte a pensar este aprendizaje también como un camino de crecimiento personal y profesional.
+          </div>
+        </div>
+
+        <div class="cta-group" style="justify-content:center;">
+          <a class="btn" href="https://hotmart.com/es/marketplace/productos/curso-detailing-2024/U90553310Y?ref=A104797637A" target="_blank" rel="noopener noreferrer">
+            QUIERO VER TODO LO QUE INCLUYE
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <h2 class="section-title">Es normal que antes de decidirte te preguntes estas cosas</h2>
+        <p class="section-subtitle">
+          Cuando algo te interesa de verdad, también aparecen dudas. Y está bien. Lo importante es que no dejes que esas dudas te sigan frenando.
+        </p>
+
+        <div class="card" style="margin-bottom:22px;">
+          <h3>Tenés 7 días de garantía</h3>
+          <p>
+            Eso te da margen para entrar, revisar el contenido y tomar tu decisión con más tranquilidad.
+          </p>
+          <p style="margin-top:10px;">
+            A veces lo único que hace falta para avanzar es sentir que podés dar el paso con más calma.
+          </p>
+        </div>
+
+        <div class="faq">
+          <details open>
+            <summary>No sé nada de detailing, ¿igual me sirve?</summary>
+            <p>
+              Sí. Justamente está pensado para ayudarte a empezar con más orden, más claridad y menos confusión.
+            </p>
+          </details>
+
+          <details>
+            <summary>¿Y si después me cuesta aplicarlo?</summary>
+            <p>
+              Como cualquier habilidad, requiere práctica. Pero es muchísimo más fácil avanzar cuando tenés una base clara que cuando intentás resolver todo solo.
+            </p>
+          </details>
+
+          <details>
+            <summary>¿Esto puede ayudarme a empezar algo propio?</summary>
+            <p>
+              Puede darte una base muy buena para eso, además de ayudarte a ver este mundo con una mirada mucho más completa y profesional.
+            </p>
+          </details>
+
+          <details>
+            <summary>Ya vi videos gratis, ¿por qué comprar un curso?</summary>
+            <p>
+              Porque una cosa es mirar contenido suelto y otra muy distinta es seguir un camino pensado para que entiendas el proceso, avances con orden y no te pierdas por el camino.
+            </p>
+          </details>
+
+          <details>
+            <summary>¿Y si hace mucho que quiero empezar y nunca arranco?</summary>
+            <p>
+              Entonces tal vez lo que necesitabas no era seguir pensándolo, sino encontrar una forma más clara y motivadora de dar el primer paso.
+            </p>
+          </details>
+        </div>
+      </div>
+    </section>
+
+    <section class="final-cta">
+      <div class="container">
+        <div class="final-box">
+          <h2 class="section-title" style="margin-bottom:14px;">
+            Si esto te entusiasma, no lo sigas dejando para después.
+          </h2>
+          <p class="section-subtitle" style="margin:0 auto 28px; max-width:760px;">
+            Este puede ser el momento en el que dejás de mirar desde afuera y empezás a meterte de verdad en algo que te gusta, te motiva y puede ayudarte a construir un camino propio.
+          </p>
+
+          <div class="cta-group" style="justify-content:center;">
+            <a class="btn" href="https://hotmart.com/es/marketplace/productos/curso-detailing-2024/U90553310Y?ref=A104797637A" target="_blank" rel="noopener noreferrer">
+              VER EL CURSO AHORA
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container"></div>
+  </footer>
+  <script src="js/IntersectionObserver.js"></script>
+</body>
+</html>
