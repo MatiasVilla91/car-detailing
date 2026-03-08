@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="es">
 <head>
   <meta charset="UTF-8" />
@@ -87,7 +87,36 @@
     }
 
     .hero{
+      position:relative;
+      isolation:isolate;
+      overflow:hidden;
       padding:78px 0 40px;
+    }
+    .hero-parallax-bg{
+      position:absolute;
+      inset:-90px 0 -40px;
+      z-index:0;
+      background-image:url("https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?auto=format&fit=crop&w=2200&q=80");
+      background-size:cover;
+      background-position:center 45%;
+      transform:translate3d(0,0,0) scale(1.08);
+      transform-origin:center;
+      will-change:transform;
+      pointer-events:none;
+    }
+    .hero::before{
+      content:"";
+      position:absolute;
+      inset:0;
+      z-index:1;
+      pointer-events:none;
+      background:
+        linear-gradient(180deg, rgba(11,15,20,.78) 0%, rgba(11,15,20,.62) 38%, rgba(11,15,20,.82) 100%),
+        linear-gradient(90deg, rgba(11,15,20,.70) 0%, rgba(11,15,20,.34) 45%, rgba(11,15,20,.56) 100%);
+    }
+    .hero > .container{
+      position:relative;
+      z-index:2;
     }
     .hero-grid{
       display:grid;
@@ -305,6 +334,13 @@
       color:var(--muted);
       margin:12px 0 0;
     }
+    details ul{
+      margin:12px 0 0;
+      padding-left:18px;
+      color:var(--muted);
+      display:grid;
+      gap:6px;
+    }
 
     .final-cta{
       padding:84px 0 100px;
@@ -367,6 +403,7 @@
 
   <main>
     <section class="hero">
+      <div class="hero-parallax-bg" aria-hidden="true"></div>
       <div class="container hero-grid">
         <div>
           <div class="eyebrow">Aprendé una habilidad que te motive y te abra camino</div>
@@ -541,31 +578,160 @@
 
     <section class="section" id="programa">
       <div class="container">
-        <h2 class="section-title">Lo que vas a ir aprendiendo dentro del curso</h2>
+        <h2 class="section-title">Contenido del curso</h2>
         <p class="section-subtitle">
-          La idea no es llenarte de teoría innecesaria. La idea es que entiendas el proceso con claridad, que sepas para qué sirve cada etapa y que empieces a ver cómo se construye un trabajo cada vez más prolijo y profesional.
+          Desplegá cada módulo para ver todas las clases y materiales incluidos.
         </p>
 
-        <div class="grid-2">
-          <div class="card">
-            <h3>Lavado y secado</h3>
-            <p>Para arrancar bien desde la base y aprender a tratar el vehículo con más cuidado y mejor técnica.</p>
-          </div>
-          <div class="card">
-            <h3>Descontaminado e inspección</h3>
-            <p>Para aprender a observar mejor el auto, entender su estado y trabajar con más criterio.</p>
-          </div>
-          <div class="card">
-            <h3>Pulido y corrección</h3>
-            <p>Para mejorar el acabado, elevar el nivel del trabajo y lograr resultados que se notan.</p>
-          </div>
-          <div class="card">
-            <h3>Interiores, faros y protección</h3>
-            <p>Para completar un servicio más prolijo, más completo y mucho más atractivo.</p>
-          </div>
+        <div class="faq">
+          <details open>
+            <summary>01 · Bienvenida</summary>
+            <ul>
+              <li>Presentación al curso</li>
+            </ul>
+          </details>
+
+          <details>
+            <summary>02 · BONO 1: Comunidad Vip de Detailers</summary>
+            <ul>
+              <li>COMUNIDAD PRIVADA</li>
+            </ul>
+          </details>
+
+          <details>
+            <summary>03 · Lavado y Secado</summary>
+            <ul>
+              <li>Técnica de lavado y secado del auto</li>
+              <li>Lavado de llantas y suspensión</li>
+              <li>Herramientas - Lavado y secado</li>
+              <li>Meguiar's fue la primera compañía en elaborar productos y tener un laboratorio para pulir</li>
+            </ul>
+          </details>
+
+          <details>
+            <summary>04 · Procesos del Car Detailing</summary>
+            <ul>
+              <li>Proceso de la descontaminación</li>
+              <li>Enmascarado del auto</li>
+              <li>Proceso del lijado</li>
+              <li>Pruebas de corte</li>
+              <li>Técnicas del pulido</li>
+              <li>Proceso del abrillantado</li>
+              <li>Preparación para el sellado</li>
+              <li>Restauración de las ópticas</li>
+              <li>Reacondicionamiento de plásticos</li>
+              <li>El final detallado</li>
+              <li>TEST DE PROCESOS</li>
+            </ul>
+          </details>
+
+          <details>
+            <summary>05 · PDF: Manual Detailing Pro</summary>
+            <ul>
+              <li>Manual PDF - Tips del Detailing Pro</li>
+              <li>Manual PDF - Restauración de Ópticas</li>
+            </ul>
+          </details>
+
+          <details>
+            <summary>06 · El pulido y secado del auto</summary>
+            <ul>
+              <li>Técnica 1</li>
+              <li>Técnica 2</li>
+            </ul>
+          </details>
+
+          <details>
+            <summary>07 · Limpieza de los interiores</summary>
+            <ul>
+              <li>Introducción y presentación</li>
+              <li>Limpieza de las Butacas</li>
+              <li>Aspirado de los Interiores</li>
+              <li>Limpieza del Cielo Razo</li>
+              <li>Limpieza de los Paneles</li>
+              <li>Limpieza y Desinfección Alfombra Interior</li>
+              <li>Limpieza de Alfombras Exteriores</li>
+              <li>Acondicionador de plásticos</li>
+              <li>Secado de los Interiores</li>
+              <li>PDF HERRAMIENTAS - DETALLADO DE INTERIORES</li>
+              <li>TEST INTERIORES</li>
+            </ul>
+          </details>
+
+          <details>
+            <summary>08 · PDF: La Guía Como montar un Negocio de Detailing</summary>
+            <ul>
+              <li>Manual PDF Proyecto Detailing</li>
+            </ul>
+          </details>
+
+          <details>
+            <summary>09 · BONO 2: Curso del Tratamiento Cerámico</summary>
+            <ul>
+              <li>Introducción al Tratamiento Cerámico</li>
+              <li>La Preparación del Vehículo</li>
+              <li>La Aplicación de Cerámica</li>
+              <li>Las ópticas</li>
+              <li>Protección acrílica</li>
+              <li>La Ventaja</li>
+              <li>Fin del Tratamiento</li>
+              <li>Manual-HERRAMIENTAS Y PRODUCTOS-Tratamiento Cerámico</li>
+              <li>TEST CERAMICO</li>
+            </ul>
+          </details>
+
+          <details>
+            <summary>10 · BONO 3: Curso Polarizado Automotriz</summary>
+            <ul>
+              <li>Eliminación exacta del tintado dañado en vidrio trasero sin afectar desempañador</li>
+              <li>Instalación de tintado en ventana trasera con moldeado térmico y eliminación precisa</li>
+              <li>Aplicación de polarizado en ventana trasera y eliminación del polarizado quemado lateral</li>
+              <li>Colocación de películas tintadas en ventanas laterales con corte preciso</li>
+              <li>Colocación y moldeado de película tintada en el parabrisas</li>
+              <li>Revisión final del polarizado</li>
+              <li>Midiendo radiación solar</li>
+              <li>Herramientas</li>
+            </ul>
+          </details>
+
+          <details>
+            <summary>11 · Vocabulario del mundo Detailing</summary>
+            <ul>
+              <li>VOCABULARIO DEL MUNDO DEL DETAILING</li>
+            </ul>
+          </details>
+
+          <details>
+            <summary>12 · CERTIFICADO DE APROBACIÓN</summary>
+            <ul>
+              <li>SOLICITA TU CERTIFICADO</li>
+              <li>TEST calidad del curso</li>
+            </ul>
+          </details>
+
+          <details>
+            <summary>13 · BONO 6 - Pack Emprendedor</summary>
+            <ul>
+              <li>LECCION 1</li>
+              <li>Lección 2</li>
+              <li>Lección 3</li>
+              <li>Lección 4</li>
+              <li>Lección 5</li>
+              <li>Lección 6</li>
+              <li>Redes Sociales y Marketing 1</li>
+              <li>Redes Sociales y Marketing 2</li>
+              <li>Redes Sociales y Marketing 3</li>
+              <li>Redes Sociales y Marketing 4</li>
+              <li>Redes Sociales y Marketing 5</li>
+              <li>Redes Sociales y Marketing 6</li>
+              <li>Redes Sociales y Marketing 7</li>
+              <li>Redes Sociales y Marketing 8</li>
+              <li>ventas Para Emprendedores 1</li>
+            </ul>
+          </details>
         </div>
 
-        <div class="cta-group" style="justify-content:center;">
+        <div class="cta-group" style="justify-content:center; margin-top:30px;">
           <a class="btn" href="https://hotmart.com/es/marketplace/productos/curso-detailing-2024/U90553310Y?ref=A104797637A" target="_blank" rel="noopener noreferrer">
             QUIERO ACCEDER AL CURSO
           </a>
@@ -697,3 +863,6 @@
   <script src="js/IntersectionObserver.js"></script>
 </body>
 </html>
+
+
+
